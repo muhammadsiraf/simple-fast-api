@@ -12,22 +12,40 @@ class Mankind(BaseModel):
     class Config:
         orm_mode = True
 
-# Kingdom
-class CreateKingdom(BaseModel):
-    name: str
-
-class GetKingdom(BaseModel):
-    id: int
-    name: str
-    king: King
-    laymens: List[Laymen] = []
+# Laymen
+class Laymen(Mankind):
+    kingdom_id: int
     
     class Config:
         orm_mode = True
     
-class GetKingdomList(BaseModel):
-    kindoms: List[GetKingdom] = []
+class CreateLaymen(Laymen):
+    pass
+
+class GetLaymen(Laymen):
+    pass
+
+class GetLaymenList(BaseModel):
+    laymens: List[Laymen] = []
+
+
+# Vizier
+class Vizier(Mankind):
+    title: str
+    king_id: int
     
+    class Config:
+        orm_mode = True
+    
+class CreateVizier(Vizier):
+    pass
+
+class GetVizier(Vizier):
+    pass
+
+class GetVizierList(BaseModel):
+    viziers: List[Vizier] = []
+  
     
 # King
 class King(Mankind):
@@ -46,35 +64,22 @@ class GetKing(King):
 class GetKingList(BaseModel):
     kings: List[GetKing] = []
     
-# Vizier
-class Vizier(Mankind):
-    title: str
-    king_id: int
     
-    class Config:
-        orm_mode = True
-    
-class CreateVizier(Vizier):
-    pass
+# Kingdom
+class CreateKingdom(BaseModel):
+    name: str
 
-class GetVizier(Vizier):
-    pass
-
-class GetVizierList(BaseModel):
-    viziers: List[Vizier] = []
-
-# Laymen
-class Laymen(Mankind):
-    kingdom_id: int
-    
-    class Config:
-        orm_mode = True
-    
-class CreateLaymen(Laymen):
-    pass
-
-class GetLaymen(Laymen):
-    pass
-
-class GetLaymenList(BaseModel):
+class GetKingdom(BaseModel):
+    id: int
+    name: str
+    king: King
     laymens: List[Laymen] = []
+    
+    class Config:
+        orm_mode = True
+    
+class GetKingdomList(BaseModel):
+    kindoms: List[GetKingdom] = []
+  
+
+

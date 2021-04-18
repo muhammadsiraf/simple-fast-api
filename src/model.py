@@ -16,7 +16,7 @@ class Mankind(Base):
 class Kingdom(Base):
     __tablename__ = "kingdoms"
     
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, ForeignKey('mankinds.id'), primary_key=True, index=True)
     name = Column(String)
     king = relationship("King", back_populates="kingdom")
     laymens = relationship("Laymen", back_populates="kingdom")
@@ -24,7 +24,7 @@ class Kingdom(Base):
 class King(Mankind):
     __tablename__ = "kings"
     
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, ForeignKey('mankinds.id'), primary_key=True, index=True)
     title = Column(String)
     kingdom = Column(ForeignKey("kingdoms.id"))
     viziers = relationship("Vizier", back_populates="king")
@@ -32,7 +32,7 @@ class King(Mankind):
 class Vizier(Mankind):
     __tablename__ = "viziers"
     
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, ForeignKey('mankinds.id'), primary_key=True, index=True)
     title = Column(String)
     king_id = Column(ForeignKey("kings.id"))
     king = relationship("King", back_populates="viziers")
@@ -40,7 +40,7 @@ class Vizier(Mankind):
 class Laymen(Mankind):
     __tablename__ = "laymens"
     
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, ForeignKey('mankinds.id'), primary_key=True, index=True)
     kingdom_id = Column(ForeignKey("kingdoms.id"))
     kingdom = relationship("Kingdom", back_populates="laymens")
         

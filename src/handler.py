@@ -90,6 +90,6 @@ async def get_laymen(db: Session, id: int):
     return response
     
 
-async def create_laymen(db: Session, req: create_laymen):
+async def create_laymen(db: Session, req: CreateLaymen):
     request = db_create_laymen(db = db, req = req)
     return request
