@@ -6,7 +6,10 @@ def get_kingdom(db: Session, kingdom_id: int):
     return db.query(model.Kingdom).filter(model.Kingdom.id == kingdom_id).first()
 
 def get_kingdom_list(db: Session, skip:int = 0, limit:int = 100):
-    return db.query(model.Kingdom).offset(skip).limit(limit).all()
+    result =  db.query(model.Kingdom).offset(skip).limit(limit).all()
+    print(result)
+    print("jambreng")
+    return result
 
 def create_kingdom(db: Session, req: schema.CreateKingdom):
     object_req = model.Kingdom(**req.dict())

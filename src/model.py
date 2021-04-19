@@ -16,10 +16,12 @@ class Mankind(Base):
 class Kingdom(Base):
     __tablename__ = "kingdoms"
     
-    id = Column(Integer, ForeignKey('mankinds.id'), primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True)
     name = Column(String)
     king = relationship("King", back_populates="kingdom")
     laymens = relationship("Laymen", back_populates="kingdom")
+    
+
     
 class King(Mankind):
     __tablename__ = "kings"
