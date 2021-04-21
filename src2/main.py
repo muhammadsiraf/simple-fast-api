@@ -65,3 +65,10 @@ def home(request: Request, nama: str):
     response = requests.get("https://www.boredapi.com/api/activity/")
     activity = response.json()["activity"]
     return templates.TemplateResponse("index.html", {"request": request, "nama": nama, "response": activity})
+
+@app.get("/all-user/", response_class=HTMLResponse)
+def userlist(request: Request):
+    response = requests.get("http://localhost:8000/users/")
+    print(response.json())
+    data = response.json()
+    return templates.TemplateResponse("users.html", {"request":request, "data":data})
