@@ -3,3 +3,6 @@ uvicorn
 SQLAlchemy
 python-dotenv
 fastapi-sqlAlchemy
+jinja2
+aiofiles
+requests

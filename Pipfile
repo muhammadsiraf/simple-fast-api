@@ -8,6 +8,10 @@ fastapi = "*"
 uvicorn = "*"
 SQLAlchemy = "*"
 python-dotenv = "*"
+aiofiles = "*"
+FastAPI-SQLAlchemy = "*"
+Jinja2 = "*"
+requests = "*"
 
 [dev-packages]
 

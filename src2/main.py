@@ -1,6 +1,9 @@
 from typing import List
-
-from fastapi import Depends, FastAPI, HTTPException
+import requests
+from fastapi import Depends, FastAPI, HTTPException, Request
+from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
 
 from . import crud, models, schemas
@@ -18,6 +21,8 @@ def get_db():
         yield db
     finally:
         db.close()
+
+templates = Jinja2Templates(directory="templates")
 
 
 @app.post("/users/", response_model=schemas.User)
@@ -53,3 +58,10 @@ def create_todos_for_user(
 def read_todos(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     items = crud.get_items(db, skip=skip, limit=limit)
     return items
+
+
+@app.get("/", response_class=HTMLResponse)  
+def home(request: Request, nama: str):
+    response = requests.get("https://www.boredapi.com/api/activity/")
+    activity = response.json()["activity"]
+    return templates.TemplateResponse("index.html", {"request": request, "nama": nama, "response": activity})
